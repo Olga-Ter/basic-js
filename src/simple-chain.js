@@ -23,10 +23,15 @@ const chainMaker = {
       position > 0 &&
       position <= this.len.split("~~").length
     ) {
-      this.len = this.len
-        .split("~~")
-        .toSpliced(position - 1, 1)
-        .join("~~");
+      let tempArr = this.len.split("~~");
+      let arrLehgth = tempArr.length;
+      for (let i = 0; i < tempArr.length; i += 1) {
+        if (i + 1 >= position) {
+          tempArr[i] = tempArr[i + 1];
+        }
+      }
+      tempArr.length = arrLehgth - 1;
+      this.len = tempArr.join("~~");
       return this;
     } else {
       this.len = "";
